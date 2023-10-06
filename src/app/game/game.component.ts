@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent {
+
+  constructor(private router: Router){  }
+
+  CardAnimation = false;
+
+  pickCard(){
+    this.CardAnimation = true;
+  }
 
 }
