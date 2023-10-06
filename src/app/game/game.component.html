@@ -1,8 +1,20 @@
+<!-- [name] = "player" ist INPUT-Variable -> Wert von Player wird an Variable name übergeben -> Variable muss in player-componente erstellt werden -->
+<app-player *ngFor="let player of game.players; let i = index" [ngStyle]="{'top.px': 100 +(i * 120)}" [name]="player" class="playerPosition"></app-player>
+
 <div class="playground">
     <div class="cardstack">
-            
+
+            <!--static cards covered -->
             <img *ngFor="let c of [1,2,3,4]; let i = index;"  [ngStyle]="{'right.px': i * 5}" src="/assets/img/Cards/card_cover.png" alt="">
-            <img (click)="pickCard()" [class.pickCard]="CardAnimation" class="topCard" style="right:25px" src="/assets/img/Cards/card_cover.png" alt="">
-            <img (click)="pickCard()" *ngIf="CardAnimation"  class="pickCard" style="right:25px" src="/assets/img/Cards/ace_1.png" alt="">
+
+            <!-- top covered card to animate hovereffect -->
+            <img (click)="pickCard()"  class="topCard" style="right:25px" src="/assets/img/Cards/card_cover.png" alt="">
+
+            <!-- open card staple -->
+            <img *ngFor="let card of game.playedCards" class="playedCard" src="/assets/img/Cards/{{ card }}.png" alt="">
+
+            <!-- animation of picked card -->
+            <img (click)="pickCard()" *ngIf="CardAnimation"  class="pickCard" style="right:25px" src="/assets/img/Cards/{{ currentCard }}.png" alt="">
+            
     </div>
 </div>
