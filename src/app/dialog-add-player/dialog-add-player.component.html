@@ -8,5 +8,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="name" cdkFocusInitial>Ok</button>               <!-- name wird übergeben an openDialog()-function die in game.component.ts liegt-->
+  <button mat-button [disabled] = "name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>               <!-- name wird übergeben an openDialog()-function die in game.component.ts liegt-->
 </div>
