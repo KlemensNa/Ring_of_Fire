@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     width: 300px;
-    background-color: rgb(115, 151, 32);
+    background-color: rgba(22, 16, 75, 0.9);
     border-top-left-radius: 75px;
     border-bottom-left-radius: 75px ;
 
@@ -13,9 +13,19 @@
     }
 
     img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
         object-fit: cover;
         border-radius: 100%;
     }
+}
+
+.currentPlayer{
+    background-color: rgb(115, 151, 32);
+    
+    // img{
+    //     width: 120px;
+    //     height: 120px;
+    // }
+    
 }

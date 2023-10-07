@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Game } from 'src/models/game';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +15,7 @@ export class GameComponent {
   currentCard: string = '';
   game: Game;                       //have to set strict in tsconfig.json to false
 
-  constructor() { };
+  constructor(public dialog: MatDialog) { };
 
   ngOnInit() {
     this.newGame();
@@ -26,8 +28,7 @@ export class GameComponent {
 
   pickCard() {
     if (!this.CardAnimation) {
-      this.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#
-      
+      this.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#      
       console.log(this.currentCard)
       this.CardAnimation = true;
 
@@ -44,5 +45,18 @@ export class GameComponent {
   pickNewCard() {
 
   }
+
+  /**
+   * function from Material Design Icon onclick. Opens MD-dialog window --> where the variable "name" is defined by an Input 
+   */
+  openDialog(): void {
+
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((name: string) => {     
+      this.game.players.push(name);
+    });
+  }
+
 
 }

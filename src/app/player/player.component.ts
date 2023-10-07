@@ -12,5 +12,6 @@ export class PlayerComponent {
    * kann in player.component html hinzugefügt werden
    */
   @Input() name;
+  @Input() playerActive: boolean = false;
 
 }

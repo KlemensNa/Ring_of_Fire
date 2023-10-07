@@ -27,12 +27,12 @@
 
 .pickCard{    
     animation: pickCardAnimation 2s ease-in-out;
-    transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(380deg);
+    transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(200deg);
 }
 
 .playedCard{
     right: 25px;
-    transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(380deg);
+    transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(200deg);
 }
 
 
@@ -47,11 +47,24 @@
         transform: scale(1.5);
     }
     100%{
-        transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(380deg);
+        transform: scale(1.5) translateX(-100px) translateY(-150px) rotate(200deg);
     }
 }
 
 .playerPosition{
     position: absolute;
     right: 0;
+}
+
+.btnAdd{
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+}
+
+.descriptionCard{
+    position: absolute;
+    bottom: 32px;
+    left: 100px;    
+    right: 100px;
 }
