@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "M13_Ring_of_fire",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

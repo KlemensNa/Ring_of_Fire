@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffire-7c2ed": {
+      "hosting": {
+        "M13_Ring_of_fire": [
+          "ringoffire-7c2ed"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffire-7c2ed"
+  }
+}
