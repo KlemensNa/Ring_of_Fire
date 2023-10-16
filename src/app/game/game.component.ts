@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { Firestore, collection, collectionData, doc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { addDoc, getDocs, onSnapshot } from 'firebase/firestore';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -13,17 +17,38 @@ export class GameComponent {
 
   CardAnimation = false;
   currentCard: string = '';
+  item$: Observable <any[]>;
   game: Game;                       //have to set strict in tsconfig.json to false
-
-  constructor(public dialog: MatDialog) { };
+  games;
+  
+  constructor(public route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) {};
 
   ngOnInit() {
-    this.newGame();
+    this.newGame();                                                                   
+    this.route.params.subscribe((parames) => {                //ActivatedRoute --> route.params gibt parameter der Route aus, hier lasse ich mir die "id" ausloggen
+      console.log(parames['id']);
+
+      let gamo = doc(this.firestore, "games", parames['id']);
+      onSnapshot(gamo, (game:any) => {
+        console.log(game.data())
+        this.game.currentPlayer = game.data().currentPlayer;
+        this.game.playedCards = game.data().playedCards;
+        this.game.players = game.data().players;
+        this.game.stack = game.data().stack;
+      })      
+    }) 
   }
+
+  // async addGame(game){
+  //   await addDoc(this.getGamesRef(), game).catch(
+  //     () => (err) => {console.error(err)
+  //   }).then((gameinfo: any) => {
+  //     console.log(gameinfo)
+  //   } )
+  // }
 
   newGame() {
     this.game = new Game();
-    console.log(this.game)
   };
 
   pickCard() {
@@ -37,7 +62,6 @@ export class GameComponent {
         this.CardAnimation = false;
         this.game.currentPlayer++;
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-        console.log(this.game)
       }, 2000)
     }
   };
