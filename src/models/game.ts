@@ -8,6 +8,8 @@ export class Game {
     public stack: string[] = [];
     public playedCards: string[] = [];
     public currentPlayer: number = 0;
+    public CardAnimation = false;
+    public currentCard: string = '';
 
     constructor() {
 
@@ -29,12 +31,11 @@ export class Game {
             stack: this.stack,
             playedCards: this.playedCards,
             currentPlayer: this.currentPlayer,
+            cardAnimation: this.CardAnimation,
+            currentCard: this.currentCard,
         }
     }
-
-
 }
-
 
 
 function shuffle(array) {

@@ -17,21 +17,15 @@ export class StartscreenComponent {
   async newGame() {
     let game = new Game();
     let gameId: string;
-    // this.addGame(game.gameToJSON());
 
-    await addDoc(this.getGameRef(), game.gameToJSON()).catch(
-      () => (err) => {
-        console.error(err)
-      }).then((gameinfo: any) => {
-        gameId = gameinfo['id'];
-      }
-      )
-
+    await addDoc(this.getGameRef(), game.gameToJSON())
+      .catch(() => (err) => {console.error(err)})
+      .then((gameinfo: any) => {gameId = gameinfo['id'];})
 
     this.router.navigateByUrl('/game/' + gameId)
   }
 
-  
+
 
   getGameRef() {
     return collection(this.firestore, "games")

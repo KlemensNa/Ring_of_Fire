@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { Firestore, collection, collectionData, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { addDoc, getDocs, onSnapshot } from 'firebase/firestore';
+import { addDoc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
@@ -15,60 +15,55 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 export class GameComponent {
 
-  CardAnimation = false;
-  currentCard: string = '';
   item$: Observable <any[]>;
   game: Game;                       //have to set strict in tsconfig.json to false
   games;
+  gameID;
   
   constructor(public route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) {};
 
   ngOnInit() {
-    this.newGame();                                                                   
-    this.route.params.subscribe((parames) => {                //ActivatedRoute --> route.params gibt parameter der Route aus, hier lasse ich mir die "id" ausloggen
-      console.log(parames['id']);
+    this.newGame();                                           // die Seite besitzt die ID, weil sie im startscreen aufgerufen wird                    
+    this.route.params.subscribe((parames) => {                //  ActivatedRoute --> route.params gibt parameter der Route aus, hier lasse ich mir die "id" ausloggen
+      this.gameID = parames['id'];
+      let gamo = doc(this.firestore, "games", parames['id']); // getRef of actual game
 
-      let gamo = doc(this.firestore, "games", parames['id']);
-      onSnapshot(gamo, (game:any) => {
-        console.log(game.data())
+      onSnapshot(gamo, (game:any) => {                        // erstelle Snapshot für Abruf/ zum abhören des Dokuments
         this.game.currentPlayer = game.data().currentPlayer;
         this.game.playedCards = game.data().playedCards;
         this.game.players = game.data().players;
         this.game.stack = game.data().stack;
+        this.game.CardAnimation = game.data().CardAnimation;
+        this.game.currentCard = game.data().currentCard;
+
       })      
     }) 
+    
   }
-
-  // async addGame(game){
-  //   await addDoc(this.getGamesRef(), game).catch(
-  //     () => (err) => {console.error(err)
-  //   }).then((gameinfo: any) => {
-  //     console.log(gameinfo)
-  //   } )
-  // }
 
   newGame() {
     this.game = new Game();
   };
 
   pickCard() {
-    if (!this.CardAnimation) {
-      this.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#      
-      this.CardAnimation = true;
-
+    if (!this.game.CardAnimation) {
+      this.game.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#    
+      this.saveGame(); 
+      this.game.CardAnimation = true;
+       
       
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.CardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.CardAnimation = false;
         this.game.currentPlayer++;
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      }, 2000)
+        this.saveGame();
+        
+      }, 2000);
     }
+    console.error(this.game)
   };
 
-  pickNewCard() {
-
-  }
 
   /**
    * function from Material Design Icon onclick. Opens MD-dialog window --> where the variable "name" is defined by an Input 
@@ -80,8 +75,14 @@ export class GameComponent {
     dialogRef.afterClosed().subscribe((name: string) => {     
       if(name && name.length > 0){
         this.game.players.push(name);
+        this.saveGame();
       }      
     });
+  }
+
+  async saveGame(){
+    let game = doc(this.firestore, "games", this.gameID);
+    await updateDoc(game, this.game.gameToJSON());
   }
 
 

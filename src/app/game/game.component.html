@@ -3,7 +3,7 @@
     [playerActive]="i == game.currentPlayer" [name]="player" class="playerPosition">
 </app-player>
 
-<app-game-info [card]= "currentCard" class="descriptionCard">
+<app-game-info [card]= "game.currentCard" class="descriptionCard">
 
 </app-game-info>
 
@@ -21,8 +21,8 @@
         <img *ngFor="let card of game.playedCards" class="playedCard" src="assets/img/Cards/{{ card }}.png" alt="">
 
         <!-- animation of picked card -->
-        <img (click)="pickCard()" *ngIf="CardAnimation" class="pickCard" style="right:25px"
-            src="assets/img/Cards/{{ currentCard }}.png" alt="">
+        <img (click)="pickCard()" *ngIf="game.CardAnimation" class="pickCard" style="right:25px"
+            src="assets/img/Cards/{{ game.currentCard }}.png" alt="">
 
     </div>
 </div>
