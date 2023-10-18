@@ -31,7 +31,7 @@ export class Game {
             stack: this.stack,
             playedCards: this.playedCards,
             currentPlayer: this.currentPlayer,
-            cardAnimation: this.CardAnimation,
+            CardAnimation: this.CardAnimation,
             currentCard: this.currentCard,
         }
     }
