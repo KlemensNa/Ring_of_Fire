@@ -1,0 +1,37 @@
+.descriptionCard{
+    background-color: rgb(115, 151, 32);
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    position: absolute;
+    bottom: 32px;
+    left: 100px;    
+    right: 100px;
+
+    @media(max-width: 960px){
+        right: 0;
+        left: 0;
+        bottom: 0;
+        padding-right: 100px;
+        min-height: 130px;
+        max-height: 23%;
+        overflow: scroll;
+    }    
+}
+
+
+.descriptionCardTitle{
+    padding: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.descriptionCardDescription{
+    padding: 0;
+    font-size: 20px;
+
+    @media(max-width: 500px){
+        font-size: 16px;
+    }
+}
+

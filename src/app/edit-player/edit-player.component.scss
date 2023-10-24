@@ -1,0 +1,33 @@
+.chooseImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background-color: rgba(22, 16, 75);
+    padding: 24px;
+}
+
+.profilPic{
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 100%;
+    background-color: white;
+
+    &:hover{
+        filter: brightness(1.2);
+    }
+}
+
+.editPlayerHeadline{
+    margin:0
+}
+
+.editDeleteBtn{
+    background-color: rgb(175, 18, 18);
+
+    &:hover{
+        filter: brightness(1.2);
+    }
+}

@@ -1,12 +1,16 @@
-<h1 mat-dialog-title>Add new Player</h1>
-<div mat-dialog-content>
-  <p>Whats the Name of the new Player?</p>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="name">                                                  <!--aus Inputfeld wird etwas ausgelesen und in die Variable name gespeichert (in .ts angelegt) -->
-  </mat-form-field> 
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled] = "name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>               <!-- name wird übergeben an openDialog()-function die in game.component.ts liegt-->
+<div class="dialog-add-player">
+  <h1 mat-dialog-title>Add new Player</h1>
+  <div mat-dialog-content>
+    <p>Whats the Name of the new Player?</p>
+    <mat-form-field class="inputfield">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name">
+      <!--aus Inputfeld wird etwas ausgelesen und in die Variable name gespeichert (in .ts angelegt) -->
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+    <!-- name wird übergeben an openDialog()-function die in game.component.ts liegt-->
+  </div>
 </div>

@@ -1,0 +1,10 @@
+<h1 class="editPlayerHeadline" mat-dialog-title style="background-color:rgba(22, 16, 75);">Change your picture</h1>
+<div class="chooseImg">
+    <img [mat-dialog-close]="pic" class="profilPic" *ngFor="let pic of profilPictures" src="/assets/img/profil/{{pic}}"
+        alt="">
+</div>
+<div mat-dialog-actions style="background-color:rgba(22, 16, 75);">
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button class="editDeleteBtn" mat-button [mat-dialog-close]="'DELETE'" cdkFocusInitial >Delete</button>
+    <!-- name wird übergeben an openDialog()-function die in game.component.ts liegt-->
+</div>

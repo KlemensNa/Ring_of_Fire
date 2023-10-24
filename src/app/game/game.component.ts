@@ -6,6 +6,7 @@ import { Firestore, collection, collectionData, doc } from '@angular/fire/firest
 import { Observable } from 'rxjs';
 import { addDoc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -18,6 +19,7 @@ export class GameComponent {
   game: Game;                       //have to set strict in tsconfig.json to false
   games;
   gameID;
+  gameOver: boolean = false;
 
   constructor(public route: ActivatedRoute, private firestore: Firestore, public dialog: MatDialog) { };
 
@@ -34,6 +36,7 @@ export class GameComponent {
         this.game.stack = game.data().stack;
         this.game.CardAnimation = game.data().CardAnimation;
         this.game.currentCard = game.data().currentCard;
+        this.game.playerImages = game.data().playerImages;
       })
     })
   }
@@ -43,22 +46,41 @@ export class GameComponent {
   };
 
   async pickCard() {
-    if (!this.game.CardAnimation) {
+    if(this.game.stack.length == 0){
+      this.gameOver = true;
+    }
+    else if (!this.game.CardAnimation) {
       this.game.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#       
       this.game.CardAnimation = true;
       this.saveGame();
-         
+
 
       setTimeout(() => {
-        
+
         this.game.playedCards.push(this.game.currentCard);
         this.game.CardAnimation = false;
         this.game.currentPlayer++;
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-        this.saveGame();        
+        this.saveGame();
       }, 2000);
     }
   };
+
+  editPlayer(id) {
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        if(change == "DELETE"){
+          this.game.players.splice(id, 1);
+        } else{          
+          this.game.playerImages[id] = change;
+          this.saveGame();
+        }
+        
+      }
+    });
+  }
 
 
   /**
@@ -71,6 +93,7 @@ export class GameComponent {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.game.playerImages.push('default.png')
         this.saveGame();
       }
     });

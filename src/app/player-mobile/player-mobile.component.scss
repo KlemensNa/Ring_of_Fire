@@ -1,21 +1,24 @@
 .player {
     display: flex;
     align-items: center;
-    width: 100%;
+    flex-direction: column;
+    width: 80px;
     background-color: rgb(115, 151, 32, 0.7);
-    border-top-left-radius: 75px;
     border-bottom-left-radius: 75px;
-
+    border-bottom-right-radius: 75px;
+    overflow: hidden;  
 
     span {
-        font-size: 16px;
-        font-weight: 700;
-        margin-left: 32px;
+        font-size: 14px;
+        font-weight: 700; 
+        padding-top: 8px;
+        display: flex;
+        justify-content: flex-start;
     }
 
     img {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         object-fit: cover;
         border-radius: 100%;
     }
@@ -23,9 +26,9 @@
 
 .currentPlayer {
     background-color: rgba(22, 16, 75);    
-    animation: changePlayer 0.5s ease-in-out;
-    transform: scale(1.2);
-    margin-left: 10%;
+    // animation: changePlayer 0.5s ease-in-out;
+    // transform: scale(1.2);   
+    // margin-top: -10%;    
 }
 
 @keyframes changePlayer{
@@ -40,4 +43,3 @@
         transform: scale(1.2);
     }
 }
-
