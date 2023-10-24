@@ -1,0 +1,25 @@
+.warning{
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 70vw;
+    background-color: rgba(22, 16, 75, 0.9);   
+
+    span{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 50%;
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+        line-height: 1.5;
+    }
+
+    img{
+        height: 70%;
+        margin-bottom: 24px;
+        object-fit: contain;
+    }
+}

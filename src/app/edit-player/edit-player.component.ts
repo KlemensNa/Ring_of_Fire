@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class EditPlayerComponent {
 
-  profilPictures = ['female.png', 'male.png', 'default.png']
+  profilPictures = ['female.png', 'male.png']
   
   constructor(public dialogRef: MatDialogRef<EditPlayerComponent>){}
 

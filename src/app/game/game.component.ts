@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { addDoc, getDocs, onSnapshot, updateDoc } from 'firebase/firestore';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
+import { PlayersWarningComponent } from '../players-warning/players-warning.component';
 
 @Component({
   selector: 'app-game',
@@ -49,7 +50,7 @@ export class GameComponent {
     if(this.game.stack.length == 0){
       this.gameOver = true;
     }
-    else if (!this.game.CardAnimation) {
+    else if (!this.game.CardAnimation && this.game.players.length > 0) {
       this.game.currentCard = this.game.stack.pop();             //take last Value of an Array and delete it#       
       this.game.CardAnimation = true;
       this.saveGame();
@@ -63,8 +64,17 @@ export class GameComponent {
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
         this.saveGame();
       }, 2000);
+    } else {
+      this.playersWarning()
     }
   };
+
+  playersWarning(){
+    
+    const dialogRef = this.dialog.open(PlayersWarningComponent);
+
+    
+  }
 
   editPlayer(id) {
     const dialogRef = this.dialog.open(EditPlayerComponent);

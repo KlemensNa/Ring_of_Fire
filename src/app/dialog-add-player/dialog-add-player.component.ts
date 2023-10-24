@@ -14,7 +14,6 @@ export class DialogAddPlayerComponent {
   }
 
   ngOnInit(): void{
-
   }
 
   onNoClick(){

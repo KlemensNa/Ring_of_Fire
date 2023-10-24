@@ -32,7 +32,7 @@
                 src="/assets/img/Cards/card_cover.png" alt="">
 
             <!-- top covered card to animate hovereffect -->
-            <img (click)="pickCard()" class="topCard" style="right:25px" src="/assets/img/Cards/card_cover.png" alt="">
+            <img ng-disabled (click)="pickCard()" class="topCard" style="right:25px" src="/assets/img/Cards/card_cover.png" alt="">
 
             <!-- open card staple -->
             <img *ngFor="let card of game.playedCards" class="playedCard" src="/assets/img/Cards/{{ card }}.png" alt="">

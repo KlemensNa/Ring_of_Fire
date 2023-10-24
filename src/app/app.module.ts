@@ -22,6 +22,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { PlayersWarningComponent } from './players-warning/players-warning.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     GameInfoComponent,
     PlayerMobileComponent,
     EditPlayerComponent,
+    PlayersWarningComponent,
   ],
   imports: [
     BrowserModule,

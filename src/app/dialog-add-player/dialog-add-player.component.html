@@ -8,6 +8,7 @@
       <!--aus Inputfeld wird etwas ausgelesen und in die Variable name gespeichert (in .ts angelegt) -->
     </mat-form-field>
   </div>
+ 
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
